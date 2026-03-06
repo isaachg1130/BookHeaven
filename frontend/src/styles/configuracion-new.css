@@ -1,0 +1,126 @@
+/* =====================================================================
+   CONFIGURACIÓN PAGE - Configuración de Usuario (Simplificado)
+===================================================================== */
+
+.configuracion-container {
+    min-height: calc(100vh - 80px);
+    padding-top: 80px;
+    background: var(--bg-gradient);
+    transition: var(--theme-transition);
+}
+
+.configuracion-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.configuracion-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.configuracion-header h1 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.configuracion-header p {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.config-single-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.config-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: var(--theme-transition);
+}
+
+.config-section h2 {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.config-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.config-option:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.config-option:first-of-type {
+    padding-top: 0;
+}
+
+.config-option-title {
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.config-option-description {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+/* Inputs & Toggles */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-input {
+    accent-color: var(--primary-color);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.select-input {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+    transition: var(--theme-transition);
+}
+
+.select-input:focus {
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    .configuracion-wrapper {
+        padding: 40px 15px;
+    }
+}

@@ -1,0 +1,215 @@
+/* Audio Player Styles */
+.audio-player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.audio-player {
+    background: var(--card-bg, #222222);
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(212, 167, 106, 0.3);
+    border: 1px solid var(--accent-color, #D4A76A);
+}
+
+.audio-player__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.audio-player__header h3 {
+    color: var(--accent-color, #D4A76A);
+    font-size: 18px;
+    margin: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.audio-player__close {
+    background: none;
+    border: none;
+    color: var(--accent-color, #D4A76A);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 12px;
+    transition: color 0.2s;
+}
+
+.audio-player__close:hover {
+    color: #FFD700;
+}
+
+.audio-player__error {
+    background-color: rgba(220, 53, 69, 0.2);
+    border: 1px solid #DC3545;
+    color: #FFB3BA;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.audio-player__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.btn-play-audio {
+    background: linear-gradient(135deg, var(--accent-color, #D4A76A) 0%, #FFA500 100%);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btn-play-audio:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(212, 167, 106, 0.4);
+}
+
+.btn-play-audio:active {
+    transform: scale(0.98);
+}
+
+.audio-player__progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-display {
+    color: var(--accent-color, #D4A76A);
+    font-size: 12px;
+    min-width: 40px;
+    font-weight: 600;
+}
+
+.progress-slider {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #444;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.progress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-color, #D4A76A);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.progress-slider::-webkit-slider-thumb:hover {
+    background: #FFD700;
+}
+
+.progress-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-color, #D4A76A);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.progress-slider::-moz-range-thumb:hover {
+    background: #FFD700;
+}
+
+.audio-player__volume {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.volume-icon {
+    font-size: 20px;
+    color: var(--accent-color, #D4A76A);
+}
+
+.volume-slider {
+    flex: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #444;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color, #D4A76A);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: #FFD700;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color, #D4A76A);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    background: #FFD700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .audio-player {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .audio-player__header h3 {
+        font-size: 16px;
+    }
+
+    .btn-play-audio {
+        padding: 10px 20px;
+        font-size: 20px;
+    }
+}

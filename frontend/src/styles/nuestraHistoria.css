@@ -1,0 +1,220 @@
+/* Página Nuestra Historia - Completa e Individual */
+
+/* Wrapper principal */
+.nh-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1A1A1A 0%, #242419 100%);
+}
+
+/* HEADER PERSONALIZADO */
+.nh-header {
+    background: linear-gradient(135deg, #1A1A1A 0%, #242419 100%);
+    padding: 20px 0;
+    border-bottom: 3px solid var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nh-header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nh-logo {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nh-logo:hover {
+    color: #E8A84B;
+}
+
+.nh-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.nh-nav a:hover {
+    color: var(--accent-color);
+    background: rgba(212, 167, 106, 0.1);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.nh-container {
+    flex: 1;
+    max-width: 960px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #2A2A24;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #3D3D3D;
+}
+
+/* ARTÍCULO */
+.nh-article h1 {
+    font-family: 'Georgia', serif;
+    font-size: 42px;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.nh-intro {
+    font-size: 18px;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.nh-article h2 {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.nh-article p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--accent-color);
+    margin-bottom: 18px;
+    text-align: justify;
+}
+
+/* FOOTER PERSONALIZADO */
+.nh-footer {
+    background: linear-gradient(135deg, #1A1A1A 0%, #242419 100%);
+    border-top: 3px solid var(--primary-color);
+    padding: 30px 20px;
+    margin-top: auto;
+}
+
+.nh-footer__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.nh-footer__content p {
+    color: var(--text-color);
+    font-size: 14px;
+    margin: 0;
+}
+
+.nh-footer__links {
+    display: flex;
+    gap: 24px;
+}
+
+.nh-footer__links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.nh-footer__links a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .nh-header__container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .nh-container {
+        margin: 30px 20px;
+        padding: 24px;
+    }
+
+    .nh-article h1 {
+        font-size: 32px;
+    }
+
+    .nh-article h2 {
+        font-size: 20px;
+        margin-top: 24px;
+    }
+
+    .nh-article p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .nh-footer__content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nh-footer__links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .nh-logo {
+        font-size: 24px;
+    }
+
+    .nh-nav a {
+        font-size: 14px;
+    }
+
+    .nh-container {
+        margin: 20px 10px;
+        padding: 16px;
+    }
+
+    .nh-article h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .nh-intro {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .nh-article h2 {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    .nh-article p {
+        font-size: 14px;
+    }
+
+    .nh-footer__content p {
+        font-size: 12px;
+    }
+
+    .nh-footer__links {
+        gap: 16px;
+        font-size: 12px;
+    }
+}

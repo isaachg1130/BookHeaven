@@ -1,0 +1,651 @@
+/* BookRow Container - Premium Streaming Style */
+.bookRow {
+    color: #fff;
+    margin-bottom: 3vw;
+    position: relative;
+    z-index: 1;
+    padding-left: 4%;
+    overflow: visible;
+    /* Allow hover scaling to overflow */
+}
+
+/* Header Section */
+.bookRow__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-right: 4%;
+}
+
+.bookRow__title {
+    font-size: 1.4vw;
+    color: #e5e5e5;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.bookRow__title:hover {
+    color: #fff;
+}
+
+/* Controls & Indicators */
+.bookRow__controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.bookRow:hover .bookRow__controls {
+    opacity: 1;
+}
+
+.bookRow__progress {
+    width: 100px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.bookRow__progress-bar {
+    height: 100%;
+    background: #e50914;
+    /* Netflix Red */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* List Area & Scroll */
+.bookRow__listarea {
+    position: relative;
+    z-index: 2;
+}
+
+.bookRow__list {
+    display: flex;
+    gap: 0.4vw;
+    /* Minimal gap for streaming look */
+    padding: 2% 0;
+    /* Vertical padding for hover scale */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Smooth cinematographic scroll */
+    will-change: transform;
+}
+
+/* INDIVIDUAL ITEM STYLES */
+.bookRow__item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, z-index 0s ease;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.bookRow__item-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    /* Traditional poster ratio */
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.bookRow__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* 
+   HOVER EFFECTS - THE "POP" 
+   When hovering an item, we scale it up significantly 
+   and show the expanded content.
+*/
+
+@media (hover: hover) {
+    .bookRow__item:hover {
+        z-index: 100;
+        transform: scale(1.3);
+        transition-delay: 0.1s;
+    }
+}
+
+/* Remove border radius on hover to precise box */
+.bookRow__item:hover .bookRow__item-container {
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Skeleton Loading */
+.bookRow__skeleton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1f1f1f;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookRow__skeleton-logo {
+    font-size: 2rem;
+    opacity: 0.2;
+}
+
+.bookRow__skeleton-shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* EXPANDED HOVER CONTENT (The Info Card) */
+.bookRow__item-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Initially covers only the poster */
+    background: #181818;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* When hovering, we actually switch opacity of the main image? 
+   No, usually Netflix replaces the item with a larger card. 
+   For simplicity in CSS-only/hybrid, we expand the item container.
+   But strictly, we are scaling the whole item. 
+*/
+
+.bookRow__item:hover .bookRow__item-hover {
+    opacity: 1;
+    visibility: visible;
+    /* We revealed the content overlay ON TOP of the image or replacing it? 
+       Let's put it on top but keep image visible as background or top section. 
+    */
+    background: #181818;
+}
+
+/* Ensure the image stays visible but maybe cropped differently in the hover card?
+   Real Netflix shows a video or backdrop. We'll show the backdrop.
+*/
+
+.bookRow__item-preview {
+    height: 40%;
+    width: 100%;
+    position: relative;
+}
+
+.bookRow__item-preview img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
+}
+
+.bookRow__item-content {
+    padding: 12px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: linear-gradient(to bottom, #181818 0%, #141414 100%);
+    border-radius: 0 0 6px 6px;
+    overflow-y: auto;
+}
+
+/* Action Buttons in Hover Card */
+.bookRow__item-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.bookRow__item-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(42, 42, 42, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bookRow__item-button:hover {
+    border-color: white;
+    background: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+.bookRow__item-button--primary {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.bookRow__item-button--primary:hover {
+    background: #e6e6e6;
+    /* Slight dim */
+}
+
+/* Metadata in Hover Card */
+.bookRow__item-info {
+    margin-bottom: 4px;
+}
+
+.bookRow__item-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: white;
+}
+
+.bookRow__item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.6rem;
+    color: #46d369;
+    /* Netflix Match Green */
+    font-weight: 600;
+}
+
+.bookRow__item-age {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0 4px;
+    color: white;
+    font-weight: normal;
+}
+
+.bookRow__item-duration {
+    color: white;
+    font-weight: normal;
+}
+
+.bookRow__item-quality {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0 4px;
+    color: white;
+    font-weight: normal;
+    border-radius: 2px;
+    font-size: 0.5rem;
+}
+
+/* Genres Tags */
+.bookRow__item-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 0.6rem;
+    color: #fff;
+}
+
+.bookRow__item-genres span:not(:last-child)::after {
+    content: "•";
+    margin-left: 4px;
+    color: #666;
+}
+
+/* Navigation Arrows (Big side overlays) */
+.bookRow__nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 4%;
+    background: rgba(20, 20, 20, 0.5);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bookRow:hover .bookRow__nav {
+    opacity: 1;
+}
+
+.bookRow__nav:hover {
+    background: rgba(20, 20, 20, 0.7);
+    width: 5%;
+    /* Slight expansion */
+}
+
+.bookRow__nav--left {
+    left: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.bookRow__nav--right {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.bookRow__nav svg {
+    transition: transform 0.2s ease;
+}
+
+.bookRow__nav:hover svg {
+    transform: scale(1.2);
+}
+
+/* 
+   PREMIUM & ADMIN BADGES
+*/
+
+.bookRow__premium-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #2a1f00, #3d2d00);
+    border: 1px solid rgba(232, 168, 75, 0.45);
+    border-radius: 20px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #F0C87A;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    box-shadow: 0 2px 8px rgba(232, 168, 75, 0.2);
+    z-index: 101;
+    overflow: hidden;
+}
+
+.bookRow__premium-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 220, 140, 0.18) 50%, transparent 60%);
+    background-size: 200% 100%;
+    animation: badgeShimmer 2.5s linear infinite;
+}
+
+@keyframes badgeShimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Admin Overlay specific adjustments */
+.bookRow__admin-actions {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.bookRow__admin-badge {
+    background: #e50914;
+    color: white;
+    font-size: 0.65rem;
+    padding: 4px 8px;
+    border-radius: 3px;
+    align-self: flex-start;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bookRow__admin-title {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+    word-break: break-word;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.bookRow__admin-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.bookRow__action-btn {
+    width: 100%;
+    padding: 8px 10px;
+    background: #333;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.bookRow__action-btn:hover {
+    background: #444;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.bookRow__action-btn.edit:hover {
+    background: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.bookRow__action-btn.delete:hover {
+    background: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.bookRow__action-btn.pdf:hover {
+    background: #3498db;
+    border-color: #3498db;
+}
+
+.bookRow__action-btn.active {
+    background: #D4A76A;
+    color: #1a1a1a;
+    border-color: #D4A76A;
+    font-weight: 700;
+}
+
+/* Admin Add Button */
+.bookRow__admin-add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #D4A76A 0%, #C4915A 100%);
+    border: none;
+    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.bookRow__admin-add-btn:hover {
+    background: linear-gradient(135deg, #E5B87A 0%, #D4A76A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 167, 106, 0.3);
+}
+
+.bookRow__admin-add-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .bookRow {
+        margin-bottom: 2.5vw;
+        padding-left: 3%;
+    }
+
+    .bookRow__title {
+        font-size: 1.6vw;
+    }
+
+    .bookRow__header {
+        padding-right: 3%;
+    }
+}
+
+@media (max-width: 768px) {
+    .bookRow {
+        margin-bottom: 2rem;
+        padding-left: 4%;
+    }
+
+    .bookRow__title {
+        font-size: 1.2rem;
+    }
+
+    .bookRow__header {
+        padding-right: 4%;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .bookRow__controls {
+        opacity: 1;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .bookRow__progress {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .bookRow__list {
+        gap: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 10px 0 20px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .bookRow__list::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, etc. */
+    }
+
+    .bookRow__item {
+        scroll-snap-align: start;
+        min-width: 140px;
+        flex-shrink: 0;
+    }
+
+    .bookRow__item-container {
+        aspect-ratio: 2/3;
+    }
+
+    .bookRow__item:hover {
+        transform: none;
+        z-index: 10;
+    }
+
+    .bookRow__nav {
+        display: none;
+    }
+
+    .bookRow__listarea {
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .bookRow {
+        margin-bottom: 1.5rem;
+        padding-left: 4%;
+    }
+
+    .bookRow__title {
+        font-size: 1rem;
+    }
+
+    .bookRow__header {
+        padding-right: 4%;
+        gap: 10px;
+    }
+
+    .bookRow__progress {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .bookRow__controls {
+        gap: 12px;
+    }
+
+    .bookRow__list {
+        gap: 6px;
+        padding-bottom: 15px;
+    }
+
+    .bookRow__item {
+        min-width: 120px;
+    }
+
+    .bookRow__item-container {
+        border-radius: 3px;
+    }
+
+    .bookRow__item img {
+        border-radius: 3px;
+    }
+}

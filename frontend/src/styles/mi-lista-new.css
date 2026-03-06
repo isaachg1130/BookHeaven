@@ -1,0 +1,232 @@
+/* =====================================================================
+   MI LISTA PAGE - Favoritos y Guardados
+===================================================================== */
+
+.lista-container {
+    min-height: calc(100vh - 80px);
+    padding-top: 80px;
+    background: var(--bg-gradient);
+}
+
+.lista-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.lista-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(212, 167, 106, 0.2);
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.lista-tab-button {
+    padding: 12px 20px;
+    background: none;
+    border: 2px solid transparent;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.lista-tab-button:hover {
+    color: var(--primary-color);
+    background: rgba(212, 167, 106, 0.05);
+}
+
+.lista-tab-button.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.lista-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+}
+
+.lista-item {
+    background: linear-gradient(135deg, rgba(40, 25, 15, 0.6) 0%, rgba(50, 35, 25, 0.6) 100%);
+    border: 1px solid rgba(212, 167, 106, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.lista-item:hover {
+    border-color: rgba(212, 167, 106, 0.4);
+    box-shadow: 0 8px 24px rgba(212, 167, 106, 0.1);
+    transform: translateY(-4px);
+}
+
+.lista-item-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(40, 25, 15, 0.8), rgba(60, 40, 25, 0.8));
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(212, 167, 106, 0.3);
+    font-size: 3rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.lista-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lista-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.lista-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.lista-item-info h3 {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lista-item-info p {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+}
+
+.lista-item-type {
+    display: inline-block;
+    background: rgba(212, 167, 106, 0.15);
+    color: var(--primary-color);
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.lista-item-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.lista-item-actions button {
+    background: rgba(212, 167, 106, 0.1);
+    border: 1px solid rgba(212, 167, 106, 0.2);
+    color: var(--primary-color);
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.lista-item-actions button:hover {
+    background: rgba(212, 167, 106, 0.2);
+    border-color: var(--primary-color);
+}
+
+.lista-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+.lista-empty>div:first-child {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.4;
+}
+
+.lista-empty p {
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .lista-wrapper {
+        padding: 40px 30px;
+    }
+
+    .lista-content {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .lista-wrapper {
+        padding: 30px 20px;
+    }
+
+    .lista-tabs {
+        gap: 10px;
+    }
+
+    .lista-tab-button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .lista-content {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lista-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

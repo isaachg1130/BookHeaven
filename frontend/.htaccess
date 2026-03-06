@@ -1,0 +1,102 @@
+# Apache Configuration para BookHeaven Frontend (.htaccess)
+# Optimizaciones de caché, compresión y seguridad
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Evitar reescribir archivos y directorios que existan
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Reescribir todas las rutas a index.html para SPA
+    RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    
+    # No comprimir imágenes que ya están comprimidas
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|svg)$ no-gzip dont-vary
+</IfModule>
+
+# Cache Control Headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Recursos con hash (no cambiarán)
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType font/opentype "access plus 1 year"
+    
+    # HTML y manifests - revisar frecuentemente
+    ExpiresByType text/html "access plus 10 minutes"
+    ExpiresByType application/manifest+json "access plus 1 day"
+    ExpiresByType application/json "access plus 1 day"
+</IfModule>
+
+# Headers de caché personalizado
+<FilesMatch "\.(?:js|css|svg|woff|woff2|ttf|eot|gif|jpg|jpeg|png)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Vary "Accept-Encoding"
+</FilesMatch>
+
+<FilesMatch "\.(?:html|json|webmanifest)$">
+    Header set Cache-Control "public, max-age=600, must-revalidate"
+    Header set Vary "Accept-Encoding"
+</FilesMatch>
+
+# Headers de Seguridad
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Compression
+    Header set Vary "Accept-Encoding"
+</IfModule>
+
+# Denegación de acceso a archivos/directorios sensibles
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<DirectoryMatch "^/(node_modules|src|public)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</DirectoryMatch>
+
+# UTF-8 encoding
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .css .js .json .webmanifest
+</IfModule>

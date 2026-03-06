@@ -1,0 +1,226 @@
+/**
+ * Skeleton Loaders - Animaciones de carga
+ * Usa CSS Grid + Flexbox para layouts responsive
+ * Animación pulse suave para feedback visual
+ */
+
+/* Animación base de pulso */
+@keyframes skeleton-pulse {
+    0% {
+        background-color: #2a2520;
+        opacity: 1;
+    }
+    50% {
+        background-color: #3a3530;
+        opacity: 0.8;
+    }
+    100% {
+        background-color: #2a2520;
+        opacity: 1;
+    }
+}
+
+/* ===== STAT CARD SKELETON ===== */
+.stat-card-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: #1a1612;
+    border-radius: 8px;
+    border: 1px solid #3a3530;
+}
+
+.skeleton-number {
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.skeleton-label {
+    width: 70%;
+    height: 16px;
+    border-radius: 4px;
+    animation: skeleton-pulse 2s ease-in-out infinite 0.2s both;
+}
+
+/* ===== CHART SKELETON ===== */
+.chart-skeleton {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 8px;
+    padding: 20px;
+    background: #1a1612;
+    border-radius: 8px;
+    border: 1px solid #3a3530;
+}
+
+.skeleton-bar {
+    flex: 1;
+    min-height: 100px;
+    border-radius: 4px;
+    animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.skeleton-bar-1 {
+    height: 60%;
+    animation-delay: 0s;
+}
+
+.skeleton-bar-2 {
+    height: 80%;
+    animation-delay: 0.2s;
+}
+
+.skeleton-bar-3 {
+    height: 40%;
+    animation-delay: 0.4s;
+}
+
+.skeleton-bar-4 {
+    height: 70%;
+    animation-delay: 0.6s;
+}
+
+/* ===== TABLE SKELETON ===== */
+.table-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-row {
+    display: flex;
+    gap: 16px;
+    padding: 12px;
+    background: #1a1612;
+    border-radius: 6px;
+    border: 1px solid #3a3530;
+}
+
+.skeleton-cell {
+    border-radius: 4px;
+    animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.skeleton-cell-1 {
+    flex: 0 0 40%;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.skeleton-cell-2 {
+    flex: 0 0 35%;
+    height: 20px;
+    animation-delay: 0.2s;
+}
+
+.skeleton-cell-3 {
+    flex: 0 0 25%;
+    height: 20px;
+    animation-delay: 0.4s;
+}
+
+/* ===== DASHBOARD SKELETON STRUCTURE ===== */
+.dashboard-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Header skeleton */
+.skeleton-header {
+    padding: 20px 0;
+    border-bottom: 2px solid #3a3530;
+}
+
+.skeleton-title {
+    width: 300px;
+    height: 32px;
+    border-radius: 6px;
+    animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.skeleton-subtitle {
+    width: 200px;
+    height: 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    animation: skeleton-pulse 2s ease-in-out infinite 0.1s both;
+}
+
+/* Stats grid - 4 columnas */
+.skeleton-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Charts grid - 2 columnas */
+.skeleton-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.skeleton-charts-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table section */
+.skeleton-table-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: transparent;
+    border-radius: 8px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .skeleton-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skeleton-charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skeleton-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .skeleton-cell {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .skeleton-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-skeleton {
+        gap: 16px;
+    }
+
+    .skeleton-title {
+        width: 200px;
+        height: 24px;
+    }
+}

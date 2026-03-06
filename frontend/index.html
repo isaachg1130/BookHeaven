@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <meta name="description" content="BookHeaven - Tu plataforma de lectura digital" />
+
+  <!-- Preconexiones para mejorar latencia -->
+  <link rel="preconnect" href="http://localhost:8000" crossorigin>
+  <link rel="dns-prefetch" href="http://localhost:8000" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/logo.png" />
+
+  <!-- Preload de fuentes críticas si las hay -->
+  <!-- <link rel="preload" as="font" href="/fonts/main.woff2" type="font/woff2" crossorigin> -->
+
+  <!-- Optimizaciones de rendering -->
+  <style>
+    /* Critical CSS inline para eliminar render-blocking */
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1a1a1a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+
+    #root {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .loading-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+  </style>
+
+  <title>BookHeaven</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

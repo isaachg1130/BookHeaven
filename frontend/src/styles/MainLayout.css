@@ -1,0 +1,325 @@
+/**
+ * MainLayout.css - Estilos para layout principal
+ * 
+ * Arquitectura:
+ * - Header: altura fija 60px (manejada por componente padre)
+ * - Body: flex row con Sidebar + MainContent
+ * - Sidebar: ancho fijo 250px
+ * - MainContent: flex 1 (toma espacio restante)
+ * 
+ * Responsabilidades:
+ * - Layout base
+ * - Colores tema oscuro
+ * - Scroll management
+ * - Responsive design
+ */
+
+:root {
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --color-bg-dark: #141414;
+    --color-bg-darker: #0f0f0f;
+    --color-bg-accent: #1a1612;
+    --color-text-primary: #E8DCC8;
+    --color-text-secondary: #999999;
+    --color-border: #3a3530;
+    --transition-smooth: 0.3s ease;
+}
+
+/* ===== MAIN LAYOUT CONTAINER ===== */
+.main-layout {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background: linear-gradient(135deg, #141414 0%, #1e1914 100%);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Previene scroll en el contenedor padre */
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background: #0f0f0f;
+    border-right: 1px solid var(--color-border);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 0;
+    z-index: 100; /* Arriba del contenido principal */
+    transition: transform var(--transition-smooth), width var(--transition-smooth);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #3a3530;
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #4a4540;
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.main-content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 40px;
+    background: linear-gradient(135deg, #141414 0%, #1e1914 100%);
+    transition: margin-left var(--transition-smooth);
+}
+
+.main-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #3a3530;
+    border-radius: 4px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #4a4540;
+}
+
+/**
+ * Content wrapper - Aplicar max-width si se desea limitar ancho
+ * Útil para pantallas muy anchas (3000px+)
+ */
+.main-content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* DESKTOP (1025px+) - Default */
+@media (min-width: 1025px) {
+    :root {
+        --sidebar-width: 250px;
+    }
+
+    .main-layout {
+        flex-direction: row;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 40px;
+    }
+}
+
+/* LARGE TABLET (768px - 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+
+    .main-layout {
+        flex-direction: row;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 30px;
+    }
+
+    .main-content-wrapper {
+        max-width: 100%;
+    }
+
+    .sidebar {
+        width: var(--sidebar-width);
+        position: fixed;
+        transform: translateX(0);
+    }
+}
+
+/* TABLET (768px) - Sidebar colapsable */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 250px;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: var(--header-height);
+        width: var(--sidebar-width);
+        height: calc(100vh - var(--header-height));
+        transform: translateX(-100%);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        transition: transform var(--transition-smooth);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .main-content-wrapper {
+        max-width: 100%;
+    }
+}
+
+/* MOBILE (480px - 768px) */
+@media (max-width: 600px) {
+    .main-content {
+        padding: 16px;
+    }
+
+    .sidebar {
+        width: calc(min(80vw, 250px));
+    }
+}
+
+/* MOBILE SMALL (< 480px) */
+@media (max-width: 480px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .main-content {
+        padding: 14px;
+        margin-left: 0;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: 100%;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content-wrapper {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/**
+ * hamburger-btn - Botón para mostrar/ocultar sidebar en mobile
+ * Agregarlo al header en mobile
+ */
+.hamburger-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color var(--transition-smooth);
+}
+
+.hamburger-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/**
+ * Overlay - Oscurecer contenido cuando sidebar está abierto en mobile
+ */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.sidebar-overlay.open {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .sidebar-overlay {
+        display: block;
+    }
+}
+
+/* ===== DARK MODE ADJUSTMENTS ===== */
+@media (prefers-color-scheme: dark) {
+    .main-layout {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+    }
+
+    .sidebar {
+        background: #050505;
+        border-right-color: #2a2520;
+    }
+
+    .main-content {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sidebar {
+    animation: slideInLeft 0.3s ease;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+    }
+}

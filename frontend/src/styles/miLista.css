@@ -1,0 +1,318 @@
+/* Estilos para Mi Lista */
+
+.miolista-wrapper {
+  min-height: 80vh;
+  padding: 32px 20px;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+}
+
+.miolista-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.miolista-container h2 {
+  color: var(--primary-color);
+  font-family: 'Georgia', serif;
+  margin-bottom: 6px;
+}
+
+.miolista-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 18px 0;
+}
+
+.miolista-tabs button {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.miolista-tabs button.active {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+}
+
+.miolista-panel {
+  background: var(--card-bg);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.miolista-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.miolista-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255,255,255,0.02);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.miolista-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.miolista-item .info h4 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.miolista-item .info p {
+  margin: 4px 0 0 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--primary-color), #A6764F);
+  color: #111;
+}
+
+.btn--primary:hover {
+  background: linear-gradient(135deg, #E8A84B, var(--primary-color));
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  .miolista-wrapper {
+    padding: 28px 16px;
+  }
+
+  .miolista-items {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .miolista-wrapper {
+    min-height: 85vh;
+    padding: 24px 16px;
+  }
+
+  .miolista-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .miolista-tabs {
+    gap: 6px;
+    margin: 12px 0 16px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .miolista-tabs button {
+    padding: 7px 14px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .miolista-panel {
+    padding: 14px;
+    border-radius: 8px;
+  }
+
+  .miolista-items {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .miolista-item {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .miolista-item img {
+    height: 120px;
+    border-radius: 4px;
+  }
+
+  .miolista-item .info h4 {
+    font-size: 12px;
+  }
+
+  .miolista-item .info p {
+    font-size: 11px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .miolista-wrapper {
+    min-height: 90vh;
+    padding: 20px 12px;
+  }
+
+  .miolista-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .miolista-tabs {
+    gap: 4px;
+    margin: 10px 0 14px 0;
+  }
+
+  .miolista-tabs button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .miolista-tabs button.active {
+    padding: 6px 12px;
+  }
+
+  .miolista-panel {
+    padding: 12px;
+  }
+
+  .miolista-items {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .miolista-item {
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .miolista-item img {
+    height: 100px;
+  }
+
+  .miolista-item .info h4 {
+    font-size: 11px;
+    margin: 0;
+  }
+
+  .miolista-item .info p {
+    font-size: 10px;
+  }
+
+  .btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+.btn--danger {
+  background: transparent;
+  color: #E87363;
+  border: 1px solid rgba(232,115,99,0.18);
+}
+
+.btn--danger:hover {
+  background: rgba(232,115,99,0.1);
+}
+
+/* Estado de lectura */
+.miolista-estado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.estado-column h3 {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.estado-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(255,255,255,0.02);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.estado-item img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.estado-item .data {
+  flex: 1;
+}
+
+.estado-item p {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 13px;
+}
+
+.estado-item small {
+  color: #999;
+  font-size: 11px;
+}
+
+.estado-item select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #0f0f0f;
+  color: #ddd;
+  border: 1px solid #333;
+  font-size: 12px;
+}
+
+.empty {
+  color: #bfbfbf;
+  text-align: center;
+  padding: 40px;
+}
+
+@media (max-width: 900px) {
+  .miolista-items {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .miolista-estado {
+    grid-template-columns: 1fr;
+  }
+}

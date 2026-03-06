@@ -1,0 +1,448 @@
+/**
+ * EditContentModal.css - Estilos para el modal de edición de contenido
+ */
+
+.edit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.edit-modal {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2420 100%);
+    border: 1px solid #3a3530;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Header */
+.edit-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #3a3530;
+}
+
+.edit-modal__header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.edit-modal__close {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.edit-modal__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+}
+
+/* Error Message */
+.edit-modal__error {
+    padding: 16px;
+    margin: 16px;
+    background: rgba(255, 67, 54, 0.1);
+    border: 1px solid #ff4336;
+    border-radius: 8px;
+    color: #ff9800;
+    font-size: 0.9rem;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form */
+.edit-modal__form {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="range"],
+.form-group textarea {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--accent-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(212, 167, 106, 0.15);
+}
+
+.form-group input[type="range"] {
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Range Value Display */
+.edit-modal__range-value {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: -4px;
+}
+
+/* File Input Wrapper */
+.file-input-wrapper {
+    position: relative;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-input-label {
+    display: block;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    color: #999;
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.file-input-label:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.file-input-wrapper input[type="file"]:focus + .file-input-label {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(212, 167, 106, 0.15);
+    color: var(--primary-color);
+}
+
+/* Preview Image */
+.edit-modal__preview {
+    margin-top: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.edit-modal__preview img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* PDF Actions */
+.edit-modal__pdf-current {
+    padding: 12px;
+    background: rgba(212, 167, 106, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.edit-modal__pdf-info {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.edit-modal__pdf-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-modal__pdf-btn {
+    padding: 8px 12px;
+    background: rgba(212, 167, 106, 0.2);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.edit-modal__pdf-btn:hover {
+    background: var(--primary-color);
+    color: #1a1a1a;
+}
+
+.edit-modal__pdf-btn--view {
+    background: rgba(212, 167, 106, 0.2);
+    border-color: var(--primary-color);
+}
+
+.edit-modal__pdf-btn--delete {
+    background: rgba(255, 67, 54, 0.2);
+    border-color: #ff4336;
+    color: #ff4336;
+}
+
+.edit-modal__pdf-btn--delete:hover {
+    background: #ff4336;
+    color: #fff;
+}
+
+.edit-modal__pdf-btn--cancel {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.edit-modal__pdf-btn--cancel:hover {
+    background: #ffc107;
+    color: #1a1a1a;
+}
+
+/* PDF Deleted Message */
+.edit-modal__pdf-deleted {
+    padding: 12px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+/* File Info */
+.edit-modal__file-info {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* Checkbox Group */
+.form-group--checkbox {
+    gap: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: normal;
+    text-transform: none;
+    color: var(--accent-color);
+    transition: color 0.2s ease;
+}
+
+.checkbox-label:hover {
+    color: var(--primary-color);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+/* Buttons */
+.edit-modal__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #C4915A 100%);
+    color: #1a1a1a;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #E5B87A 0%, var(--primary-color) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 167, 106, 0.3);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Scrollbar */
+.edit-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.edit-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.edit-modal::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.edit-modal::-webkit-scrollbar-thumb:hover {
+    background: #4a4540;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .edit-modal {
+        width: 95%;
+        max-width: 100%;
+    }
+
+    .edit-modal__header {
+        padding: 16px;
+    }
+
+    .edit-modal__header h2 {
+        font-size: 1.2rem;
+    }
+
+    .edit-modal__form {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .edit-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .edit-modal__pdf-actions {
+        flex-direction: column;
+    }
+
+    .edit-modal__pdf-deleted {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

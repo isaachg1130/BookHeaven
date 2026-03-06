@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator de Datos del Dashboard - BookHeaven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #e8dcc8;
+        }
+
+        .container {
+            background: #1f1f1f;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid #3a3530;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #d4a76a;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .control-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #d4a76a;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3a3530;
+            border-radius: 6px;
+            background: #2a2a2a;
+            color: #e8dcc8;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #d4a76a;
+            box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .button-group.single {
+            grid-template-columns: 1fr;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #d4a76a;
+            color: #1a1a1a;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #e5b87a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 167, 106, 0.3);
+        }
+
+        .btn-secondary {
+            background: #3a3530;
+            color: #d4a76a;
+            border: 1px solid #d4a76a;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #4a4540;
+            box-shadow: 0 8px 20px rgba(212, 167, 106, 0.2);
+        }
+
+        .btn-danger {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #ff6666;
+            box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid transparent;
+            display: none;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .status.success {
+            background: rgba(76, 175, 80, 0.1);
+            border-left-color: #4caf50;
+            color: #81c784;
+        }
+
+        .status.error {
+            background: rgba(244, 67, 54, 0.1);
+            border-left-color: #f44336;
+            color: #ef5350;
+        }
+
+        .status.loading {
+            background: rgba(33, 150, 243, 0.1);
+            border-left-color: #2196f3;
+            color: #64b5f6;
+        }
+
+        .status-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(212, 167, 106, 0.3);
+            border-top: 2px solid #d4a76a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .info-box {
+            background: rgba(212, 167, 106, 0.1);
+            border-left: 4px solid #d4a76a;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #b8956a;
+        }
+
+        .info-box strong {
+            color: #d4a76a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #d4a76a;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            color: #d4a76a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Dashboard Data Generator</h1>
+        <p class="subtitle">Genera datos reales de prueba para visualizar el dashboard</p>
+
+        <div class="info-box">
+            <strong>⚠️ Solo en desarrollo:</strong> Este generador solo funciona en ambiente de desarrollo
+            (APP_ENV=local)
+        </div>
+
+        <div class="control-group">
+            <label for="readingsCount">📖 Registros de Lectura</label>
+            <input type="number" id="readingsCount" min="10" max="1000" value="100" />
+        </div>
+
+        <div class="control-group">
+            <label for="paymentsCount">💳 Registros de Pago</label>
+            <input type="number" id="paymentsCount" min="5" max="500" value="30" />
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="generateData()">
+                ✨ Generar Datos
+            </button>
+            <button class="btn-secondary" onclick="viewStats()">
+                📈 Ver Estadísticas
+            </button>
+        </div>
+
+        <div class="button-group single">
+            <button class="btn-danger" onclick="clearData()">
+                🗑️ Limpiar Todos los Datos
+            </button>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        const apiUrl = '/api/debug/dashboard';
+
+        function showStatus(message, type = 'loading', details = '') {
+            const status = document.getElementById('status');
+            status.className = `status show ${type}`;
+
+            const spinner = type === 'loading' ? '<span class="spinner"></span>' : '';
+            const icon = {
+                'success': '✅',
+                'error': '❌',
+                'loading': ''
+            }[type] || '';
+
+            status.innerHTML = `
+                <div class="status-title">${spinner} ${icon} ${message}</div>
+                ${details ? `<div>${details}</div>` : ''}
+            `;
+        }
+
+        async function generateData() {
+            const readingsCount = document.getElementById('readingsCount').value;
+            const paymentsCount = document.getElementById('paymentsCount').value;
+
+            if (!readingsCount || !paymentsCount) {
+                showStatus('Error', 'error', 'Por favor ingresa valores válidos');
+                return;
+            }
+
+            showStatus('Generando datos...', 'loading');
+
+            try {
+                const response = await fetch(
+                    `${apiUrl}/seed?count=${readingsCount}&payments=${paymentsCount}`
+                );
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const details = `
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">📖 Lecturas</div>
+                                <div class="stat-value">${data.data.readings_created}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">💳 Pagos</div>
+                                <div class="stat-value">$${parseFloat(data.data.total_revenue).toFixed(2)}</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: #81c784;">
+                            ✨ Los datos aparecerán en el dashboard en 30 segundos max. Abre el dashboard ahora!
+                        </p>
+                    `;
+                    showStatus('¡Datos generados exitosamente!', 'success', details);
+                } else {
+                    showStatus('Error: ' + data.message, 'error', data.message);
+                }
+            } catch (error) {
+                showStatus('Error de conexión', 'error', error.message);
+            }
+        }
+
+        async function viewStats() {
+            showStatus('Cargando estadísticas...', 'loading');
+
+            try {
+                const response = await fetch(`${apiUrl}/stats`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const s = data.data;
+                    const details = `
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">📖 Total Lecturas</div>
+                                <div class="stat-value">${s.total_readings}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">💳 Total Pagos</div>
+                                <div class="stat-value">${s.total_payments}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">💰 Ingresos Totales</div>
+                                <div class="stat-value">$${s.total_revenue}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">📊 Promedio/Pago</div>
+                                <div class="stat-value">$${s.avg_payment}</div>
+                            </div>
+                        </div>
+                    `;
+                    showStatus('📊 Estadísticas Actuales', 'success', details);
+                } else {
+                    showStatus('Error al cargar estadísticas', 'error', data.message);
+                }
+            } catch (error) {
+                showStatus('Error de conexión', 'error', error.message);
+            }
+        }
+
+        async function clearData() {
+            if (!confirm('⚠️ ¿Estás seguro? Esto eliminará todos los datos de prueba.')) {
+                return;
+            }
+
+            showStatus('Limpiando datos...', 'loading');
+
+            try {
+                const response = await fetch(`${apiUrl}/clear`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const details = `
+                        <p>• ${data.data.readings_deleted} registros de lectura eliminados</p>
+                        <p>• ${data.data.payments_deleted} registros de pago eliminados</p>
+                    `;
+                    showStatus('✨ Datos eliminados exitosamente', 'success', details);
+                } else {
+                    showStatus('Error al limpiar datos', 'error', data.message);
+                }
+            } catch (error) {
+                showStatus('Error de conexión', 'error', error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
