@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/nuestraHistoria.css'
 
 function NuestraHistoria() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="nh-wrapper">
             {/* Header */}
@@ -15,48 +19,79 @@ function NuestraHistoria() {
                 </div>
             </header>
 
-            {/* Main Content */}
-            <main className="nh-container">
-                <article className="nh-article">
+            {/* Hero Section */}
+            <section className="nh-hero">
+                <div className="nh-hero__content">
                     <h1>Nuestra Historia</h1>
-                    <p className="nh-intro">Conoce cómo BookHeaven se convirtió en el refugio para lectores apasionados</p>
+                    <p>Donde cada página cuenta el inicio de un gran refugio literario.</p>
+                </div>
+            </section>
 
-                    <section>
-                        <h2>Cómo nació la idea de BookHeaven</h2>
-                        <p>
-                            BookHeaven nació de una pequeña conversación entre tres amigos que recordaban con nostalgia la experiencia de descubrir libros en librerías locales: recomendaciones cálidas, portadas que llamaban desde los estantes y conversaciones con lectores apasionados.
-                            Queríamos recrear ese refugio en línea, un lugar donde cada visita invitara al descubrimiento y donde las historias encontrarán a quienes más las necesitan.
-                        </p>
-                    </section>
+            {/* Main Content */}
+            <main className="nh-main">
 
-                    <section>
-                        <h2>El problema que buscaba resolver</h2>
-                        <p>
-                            En el océano de contenidos digitales muchas voces quedan silenciadas: obras independientes pasan desapercibidas y las recomendaciones automatizadas resultan frías y repetitivas. BookHeaven nació para cerrar esa brecha, poniendo en el centro la experiencia humana de la lectura y creando un espacio que destaque diversidad, calidad y corazón.
-                        </p>
-                    </section>
+                {/* Intro Section */}
+                <section className="nh-section">
+                    <h2>El Origen</h2>
+                    <p style={{ fontSize: '1.2rem', lineHeight: '2' }}>
+                        BookHeaven no nació en una oficina, sino en el rincón de una pequeña cafetería.
+                        Tres amigos, rodeados de libros usados y tazas de café vacías, compartían un sueño:
+                        crear un espacio digital que no solo vendiera libros, sino que
+                        <strong> protegiera la magia de leer</strong>.
+                    </p>
+                </section>
 
-                    <section>
-                        <h2>La evolución del proyecto</h2>
-                        <p>
-                            Lo que comenzó como una lista curada por entusiastas, creció paso a paso gracias a la comunidad: reseñas sinceras, herramientas para autores, secciones de descubrimiento y eventos colaborativos. Cada decisión fue guiada por el feedback de lectores y autores, transformando BookHeaven en una plataforma viva y en constante mejora.
-                        </p>
-                    </section>
+                {/* Timeline Section */}
+                <section className="nh-section">
+                    <h2>Nuestra Evolución</h2>
+                    <div className="nh-timeline">
+                        <div className="nh-timeline__item">
+                            <div className="nh-timeline__dot"></div>
+                            <div className="nh-timeline__content">
+                                <h3>2024: La Primera chispa</h3>
+                                <p>Comenzamos como una simple lista de recomendaciones enviada por correo. La respuesta fue abrumadora; los lectores buscaban algo más personal que un algoritmo.</p>
+                            </div>
+                        </div>
+                        <div className="nh-timeline__item">
+                            <div className="nh-timeline__dot"></div>
+                            <div className="nh-timeline__content">
+                                <h3>2025: Construyendo el Refugio</h3>
+                                <p>Lanzamos nuestra primera plataforma beta. Integramos herramientas para autores independientes, dándoles un escenario donde sus voces finalmente fueran escuchadas.</p>
+                            </div>
+                        </div>
+                        <div className="nh-timeline__item">
+                            <div className="nh-timeline__dot"></div>
+                            <div className="nh-timeline__content">
+                                <h3>2026: Una Comunidad Global</h3>
+                                <p>Hoy, BookHeaven es el hogar de miles de soñadores. Hemos evolucionado hacia un ecosistema completo que incluye audiolibros, eventos virtuales y una biblioteca sin fin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                    <section>
-                        <h2>La visión a futuro</h2>
-                        <p>
-                            Soñamos con un ecosistema donde leer y crear se encuentren sin barreras: recomendaciones más humanas, apoyo real a autores emergentes, programas de mentoring y experiencias que conecten historias con la vida de las personas. Nuestro objetivo es abrir puertas para que cada lector encuentre su próxima lectura transformadora.
-                        </p>
-                    </section>
+                {/* Vision Section */}
+                <section className="nh-section">
+                    <div className="nh-vision-container">
+                        <div className="nh-vision__text">
+                            <h2>Nuestra Visión</h2>
+                            <p style={{ fontSize: '1.2rem', textAlign: 'center' }}>
+                                Creemos en un futuro donde el conocimiento y la imaginación no tengan barreras.
+                                Nuestra misión es seguir conectando historias con corazones, fomentando la
+                                diversidad literaria y apoyando a la próxima generación de escritores.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
-                </article>
             </main>
 
             {/* Footer */}
             <footer className="nh-footer">
                 <div className="nh-footer__content">
-                    <p>&copy; 2026 BookHeaven. Todos los derechos reservados.</p>
+                    <div className="nh-footer__info">
+                        <Link to="/" className="nh-logo" style={{ fontSize: '1.5rem' }}>BookHeaven</Link>
+                        <p style={{ marginTop: '1rem', color: 'rgba(232, 220, 200, 0.5)' }}>&copy; 2026. Todos los derechos reservados.</p>
+                    </div>
                     <div className="nh-footer__links">
                         <Link to="/">Inicio</Link>
                         <a href="#">Contacto</a>
@@ -69,3 +104,4 @@ function NuestraHistoria() {
 }
 
 export default NuestraHistoria
+

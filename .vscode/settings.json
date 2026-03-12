@@ -1,0 +1,7 @@
+{
+    "php.executablePath": "",
+    "php.validate.executablePath": "",
+    "intelephense.environment.phpVersion": "8.2.0",
+    "php.version": "8.2",
+    "php.validate.enable": false
+}

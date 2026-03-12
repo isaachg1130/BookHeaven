@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import apiClient from "../api/client";
 
 /**
  * useDashboardData - Custom hook para consumir datos del dashboard
@@ -37,29 +38,10 @@ const useDashboardData = (refreshIntervalSeconds = 30) => {
       console.log("🔐 Token encontrado:", !!token);
       console.log("📡 Intentando conectar con /api/admin/dashboard");
 
-      const response = await fetch("/api/admin/dashboard", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          ...(token && { Authorization: `Bearer ${token}` }),
-        },
-      });
+      const response = await apiClient.get('/admin/dashboard');
 
-      console.log("✅ Response status:", response.status);
-
-      if (!response.ok) {
-        if (response.status === 403) {
-          throw new Error("No tienes permisos para acceder al dashboard");
-        }
-        if (response.status === 401) {
-          throw new Error("Sesión expirada. Por favor inicia sesión de nuevo");
-        }
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-
+      const result = response.data;
+      
       if (!result.success) {
         throw new Error(result.message || "Error desconocido del servidor");
       }
